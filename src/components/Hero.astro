@@ -1,0 +1,101 @@
+---
+---
+<section class="relative bg-brand-navy overflow-hidden min-h-[88vh] flex items-center">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" fill="#E41E2D"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+  </div>
+
+  <!-- Red diagonal accent -->
+  <div class="absolute right-0 top-0 h-full w-1/2 bg-brand-red/10 skew-x-[-12deg] origin-top-right"></div>
+  <div class="absolute right-0 top-0 h-full w-1/4 bg-brand-red/20 skew-x-[-12deg] origin-top-right translate-x-16"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-12 items-center">
+    <!-- Text -->
+    <div>
+      <span class="inline-block bg-brand-red/20 text-brand-red font-body font-semibold text-sm px-4 py-1.5 rounded-full mb-6 border border-brand-red/30">
+        🚀 ¡Instalación 100% Gratis!
+      </span>
+      <h1 class="font-display font-black text-white text-5xl md:text-7xl leading-none uppercase tracking-tight mb-6">
+        Internet<br/>
+        <span class="text-brand-red">Fibra</span><br/>
+        <span class="text-brand-red">Óptica</span><br/>
+        de verdad
+      </h1>
+      <p class="text-white/70 font-body text-lg mb-8 max-w-md leading-relaxed">
+        Velocidades simétricas desde <strong class="text-white">200 Mbps</strong>. Sin cortes, sin excusas. El internet más rápido de Abancay.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#planes" class="bg-brand-red hover:bg-red-700 text-white font-display font-bold text-xl px-8 py-3.5 rounded-full transition-all duration-200 shadow-lg shadow-red-900/40 hover:scale-105">
+          Ver Planes
+        </a>
+        <a href="https://wa.me/51946759827" target="_blank" class="border-2 border-white/30 hover:border-brand-red text-white hover:text-brand-red font-display font-bold text-xl px-8 py-3.5 rounded-full transition-all duration-200">
+          WhatsApp
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="mt-12 flex gap-8">
+        {[
+          { num: '5000', label: 'Mbps máx.' },
+          { num: '0S/.', label: 'Instalación' },
+          { num: '24/7', label: 'Soporte' },
+        ].map(s => (
+          <div>
+            <p class="font-display font-black text-brand-red text-4xl">{s.num}</p>
+            <p class="text-white/60 text-sm font-body">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Visual card -->
+    <div class="flex justify-center">
+      <div class="relative">
+        <!-- Glow -->
+        <div class="absolute inset-0 bg-brand-red/30 blur-3xl rounded-full scale-75"></div>
+        <!-- Router illustration -->
+        <div class="relative bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-sm text-center">
+          <svg class="w-40 h-40 mx-auto mb-6" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Router body -->
+            <rect x="40" y="110" width="120" height="50" rx="10" fill="#E41E2D"/>
+            <rect x="50" y="120" width="100" height="30" rx="6" fill="#C0192A"/>
+            <!-- Lights -->
+            <circle cx="70" cy="135" r="5" fill="#00FF88"/>
+            <circle cx="85" cy="135" r="5" fill="#00FF88"/>
+            <circle cx="100" cy="135" r="5" fill="#FFD700"/>
+            <!-- Antenas -->
+            <line x1="65" y1="110" x2="55" y2="60" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            <line x1="135" y1="110" x2="145" y2="60" stroke="white" stroke-width="4" stroke-linecap="round"/>
+            <!-- Wifi arcs -->
+            <path d="M75 85 Q100 55 125 85" stroke="#E41E2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M60 70 Q100 30 140 70" stroke="#E41E2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M45 55 Q100 5 155 55" stroke="#E41E2D" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <p class="text-white font-display font-bold text-2xl">100% Fibra Óptica</p>
+          <p class="text-white/60 font-body text-sm mt-1">Latencia ultra baja · Sin límites</p>
+
+          <div class="mt-6 grid grid-cols-2 gap-3">
+            {[
+              { icon: '↓', label: 'Descarga', val: 'Hasta 5000' },
+              { icon: '↑', label: 'Subida', val: 'Simétrica' },
+            ].map(f => (
+              <div class="bg-white/10 rounded-xl p-3">
+                <span class="text-brand-red text-xl">{f.icon}</span>
+                <p class="text-white/60 text-xs mt-1">{f.label}</p>
+                <p class="text-white font-display font-bold text-lg">{f.val}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

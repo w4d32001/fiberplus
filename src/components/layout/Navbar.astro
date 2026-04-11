@@ -1,0 +1,115 @@
+---
+import logo from "../../assets/img/logo.png";
+import { Icon } from "astro-icon/components";
+
+const links = [
+    { name: "Inicio",    section: "inicio" },
+    { name: "Servicios", section: "servicios" },
+    { name: "Beneficios",section: "beneficios" },
+    { name: "Ayuda",     section: "ayuda" },
+    { name: "Ubicación", section: "ubicacion" },
+];
+---
+
+<header class="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+    <div class="flex items-center h-20 w-full justify-between pl-10 pr-0">
+        <div class="shrink-0">
+            <img src={logo.src} alt="Logo de Fiberplus" class="h-14 object-cover" />
+        </div>
+        <nav class="hidden lg:flex items-center h-full">
+            <ul class="flex items-center h-full">
+                {links.map((item) => (
+                    <li class="group h-20 flex items-center justify-center">
+                        <button
+                            data-section={item.section}
+                            class="nav-link group-hover:bg-gray-100 h-full w-full flex items-center px-5 uppercase text-sm font-medium tracking-wide transition-colors cursor-pointer"
+                        >
+                            {item.name}
+                        </button>
+                    </li>
+                ))}
+            </ul>
+            <div class="flex items-center bg-primary h-20 px-6 gap-4">
+                <span class="flex items-center text-white gap-2 pr-6 text-sm font-medium">
+                    <Icon name="lucide:phone" class="w-5 h-5" />
+                    017073000
+                </span>
+                <div class="flex items-center gap-3 pl-6">
+                    <span class="bg-white rounded-full p-0.5">
+                        <Icon name="lucide:facebook" class="w-5 h-5 text-primary cursor-pointer" />
+                    </span>
+                    <span class="bg-white rounded-full p-0.5">
+                        <Icon name="lucide:instagram" class="w-5 h-5 text-primary cursor-pointer" />
+                    </span>
+                </div>
+            </div>
+        </nav>
+        <div class="flex items-center lg:hidden gap-3 pr-4">
+            <a href="tel:017073000" class="text-primary">
+                <Icon name="lucide:phone" class="w-6 h-6" />
+            </a>
+            <button id="menu-toggle" aria-label="Abrir menú" class="text-gray-700">
+                <Icon name="lucide:menu" class="w-7 h-7" id="icon-open" />
+                <Icon name="lucide:x"    class="w-7 h-7 hidden" id="icon-close" />
+            </button>
+        </div>
+    </div>
+    <div
+        id="mobile-menu"
+        class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg"
+    >
+        <ul class="flex flex-col">
+            {links.map((item) => (
+                <li>
+                    <button
+                        data-section={item.section}
+                        class="nav-link mobile-nav-link w-full text-left px-8 py-4 uppercase text-sm font-medium tracking-wide hover:bg-gray-50 hover:text-primary transition-colors cursor-pointer"
+                    >
+                        {item.name}
+                    </button>
+                </li>
+            ))}
+        </ul>
+        <div class="flex items-center gap-4 px-8 py-4 bg-gray-50 border-t border-gray-100">
+            <span class="bg-primary rounded-full p-1.5">
+                <Icon name="lucide:facebook" class="w-5 h-5 text-white cursor-pointer" />
+            </span>
+            <span class="bg-primary rounded-full p-1.5">
+                <Icon name="lucide:instagram" class="w-5 h-5 text-white cursor-pointer" />
+            </span>
+        </div>
+    </div>
+</header>
+
+<div class="h-20"></div>
+
+<script>
+    function scrollToSection(sectionId: string) {
+        const target = document.getElementById(sectionId);
+        if (!target) return;
+        const headerHeight = 80; // h-20 = 5rem = 80px
+        const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({ top, behavior: "smooth" });
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".nav-link").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const section = btn.dataset.section;
+            if (section) scrollToSection(section);
+            document.getElementById("mobile-menu")?.classList.add("hidden");
+            document.getElementById("icon-open")?.classList.remove("hidden");
+            document.getElementById("icon-close")?.classList.add("hidden");
+        });
+    });
+
+    const toggle    = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const iconOpen  = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+
+    toggle?.addEventListener("click", () => {
+        const isHidden = mobileMenu?.classList.toggle("hidden");
+        iconOpen?.classList.toggle("hidden", !isHidden);
+        iconClose?.classList.toggle("hidden", isHidden);
+    });
+</script>

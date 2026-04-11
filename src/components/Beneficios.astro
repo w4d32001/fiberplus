@@ -1,0 +1,101 @@
+---
+const beneficios = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+      <rect x="8" y="28" width="48" height="28" rx="3" stroke="#e60000" stroke-width="3" fill="none"/>
+      <rect x="16" y="36" width="10" height="8" rx="1" stroke="#e60000" stroke-width="2.5" fill="none"/>
+      <rect x="32" y="36" width="16" height="3" rx="1" fill="#e60000"/>
+      <rect x="32" y="43" width="10" height="3" rx="1" fill="#e60000"/>
+      <path d="M20 28V20a12 12 0 0124 0v8" stroke="#e60000" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <circle cx="32" cy="12" r="3" fill="#e60000"/>
+    </svg>`,
+    titulo: '100% Fibra óptica',
+    desc: 'Experimenta una conexión sin límites con el verdadero internet fibra óptica.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+      <rect x="6" y="14" width="38" height="28" rx="3" stroke="#e60000" stroke-width="3" fill="none"/>
+      <line x1="6" y1="36" x2="44" y2="36" stroke="#e60000" stroke-width="2.5"/>
+      <path d="M25 42v6M15 48h20" stroke="#e60000" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="24" r="10" stroke="#e60000" stroke-width="3" fill="none"/>
+      <path d="M46 24a4 4 0 018 0" stroke="#e60000" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="50" cy="24" r="2" fill="#e60000"/>
+      <path d="M42 18l-6-4M42 30l-6 4" stroke="#e60000" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
+    titulo: '+Velocidad',
+    desc: 'Somos el internet más rápido del Perú. Hasta 5000 Mbps de velocidad.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="22" stroke="#e60000" stroke-width="3" fill="none"/>
+      <circle cx="32" cy="32" r="2.5" fill="#e60000"/>
+      <line x1="32" y1="12" x2="32" y2="16" stroke="#e60000" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="32" y1="48" x2="32" y2="52" stroke="#e60000" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="12" y1="32" x2="16" y2="32" stroke="#e60000" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="48" y1="32" x2="52" y2="32" stroke="#e60000" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M32 32L44 20" stroke="#e60000" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>`,
+    titulo: '+Estabilidad',
+    desc: 'Descarga, transmite y juega con el internet más estable de Latinoamérica.',
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+      <path d="M8 20 Q32 8 56 20" stroke="#e60000" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M14 30 Q32 20 50 30" stroke="#e60000" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M20 40 Q32 32 44 40" stroke="#e60000" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <rect x="28" y="46" width="8" height="8" rx="4" fill="#e60000"/>
+    </svg>`,
+    titulo: '+Conectividad',
+    desc: 'Conéctate en más dispositivos sin perder calidad ni velocidad.',
+  },
+];
+---
+
+<section id="beneficios" class="py-16 md:py-20 bg-white overflow-hidden">
+  <div class="mx-auto px-8">
+
+    <div class="text-center mb-12 md:mb-16">
+      <h2 class="font-display font-black text-brand-dark text-2xl sm:text-3xl md:text-4xl uppercase leading-tight">
+        ¿Cuáles son los beneficios de<br/>
+        <span class="text-brand-red">nuestros planes 100% fibra óptica?</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+      {beneficios.map((b) => (
+        <div class="group flex flex-col items-center">
+
+          <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-60 lg:h-60
+                      rounded-full border-[2.5px] border-brand-navy bg-white
+                      flex items-center justify-center
+                      transition-colors duration-300 group-hover:border-brand-red
+                      shrink-0">
+
+            <div class="w-32 h-32 sm:w-36 sm:h-36 md:w-42 md:h-42 lg:w-48 lg:h-48
+                        rounded-full border-2 border-brand-navy bg-white
+                        flex flex-col items-center justify-center
+                        gap-1.5 md:gap-2
+                        px-3 md:px-4
+                        text-center
+                        transition-colors duration-300 group-hover:border-brand-red">
+
+              <div class="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 [&>svg]:w-full [&>svg]:h-full">
+                <Fragment set:html={b.icon} />
+              </div>
+
+              <h3 class="font-display font-bold text-brand-dark text-[10px] sm:text-xs md:text-sm uppercase leading-tight tracking-wide">
+                {b.titulo}
+              </h3>
+              <p class="text-brand-dark/60 font-body text-[9px] sm:text-[10px] md:text-xs leading-snug">
+                {b.desc}
+              </p>
+
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
