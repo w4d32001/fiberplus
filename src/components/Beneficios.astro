@@ -50,43 +50,61 @@ const beneficios = [
   },
 ];
 ---
+<section id="beneficios" class="py-12 md:py-16 bg-white">
+  <div class="mx-auto px-6 sm:px-8 md:px-12 max-w-7xl">
 
-<section id="beneficios" class="py-16 md:py-20 bg-white overflow-hidden">
-  <div class="mx-auto px-8">
-
-    <div class="text-center mb-12 md:mb-16">
-      <h2 class="font-display font-black text-brand-dark text-2xl sm:text-3xl md:text-4xl uppercase leading-tight">
+    <div class="text-center mb-10 md:mb-14">
+      <h2 class="font-display font-black text-[#020812] text-2xl sm:text-3xl md:text-4xl uppercase leading-tight">
         ¿Cuáles son los beneficios de<br/>
-        <span class="text-brand-red">nuestros planes 100% fibra óptica?</span>
+        <span class="text-[#00416b]">nuestros planes 100% fibra óptica?</span>
       </h2>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 justify-items-center">
       {beneficios.map((b) => (
-        <div class="group flex flex-col items-center">
+        <div class="flex flex-col items-center" style="padding-top: 28px;">
 
-          <div class="w-40 h-40 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-60 lg:h-60
-                      rounded-full border-[2.5px] border-brand-navy bg-white
-                      flex items-center justify-center
-                      transition-colors duration-300 group-hover:border-brand-red
-                      shrink-0">
+          <div class="relative flex items-center justify-center" style="overflow: visible;">
 
-            <div class="w-32 h-32 sm:w-36 sm:h-36 md:w-42 md:h-42 lg:w-48 lg:h-48
-                        rounded-full border-2 border-brand-navy bg-white
+            <!-- ARCO SUPERIOR con SVG: extremos rectos y longitud controlada -->
+            <svg
+              viewBox="0 0 120 120"
+              xmlns="http://www.w3.org/2000/svg"
+              class="absolute pointer-events-none"
+              style="width: 112%; height: 112%; top: -70%; left: -6%; z-index: 2; overflow: visible;"
+            >
+              <!--
+                Círculo de radio 55 centrado en (60,60).
+                Arco desde ~220° hasta ~320° (parte superior, 100° de amplitud).
+                stroke-linecap="butt" = extremos planos, sin punta.
+              -->
+              <path
+                d="M 17.6 82.4 A 55 55 0 0 1 102.4 82.4"
+                fill="none"
+                stroke="#1b2a4a"
+                stroke-width="7"
+                stroke-linecap="butt"
+              />
+            </svg>
+
+            <!-- CÍRCULO PRINCIPAL -->
+            <div class="w-42 h-42 sm:w-48 sm:h-48 md:w-52 md:h-52 lg:w-60 lg:h-60 xl:w-68 xl:h-68
+                        rounded-full border-[5px] border-[#020812]
                         flex flex-col items-center justify-center
-                        gap-1.5 md:gap-2
-                        px-3 md:px-4
-                        text-center
-                        transition-colors duration-300 group-hover:border-brand-red">
+                        text-center px-4 gap-2 bg-white relative z-1">
 
-              <div class="w-8 h-8 sm:w-9 sm:h-9 md:w-11 md:h-11 shrink-0 [&>svg]:w-full [&>svg]:h-full">
+              <!-- ICONO -->
+              <div class="w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-18 xl:h-18 [&>svg]:w-full [&>svg]:h-full">
                 <Fragment set:html={b.icon} />
               </div>
 
-              <h3 class="font-display font-bold text-brand-dark text-[10px] sm:text-xs md:text-sm uppercase leading-tight tracking-wide">
+              <!-- TITULO -->
+              <h3 class="font-bold text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg uppercase text-brand-dark leading-tight">
                 {b.titulo}
               </h3>
-              <p class="text-brand-dark/60 font-body text-[9px] sm:text-[10px] md:text-xs leading-snug">
+
+              <!-- DESCRIPCIÓN -->
+              <p class="text-[10px] sm:text-[11px] md:text-xs lg:text-base px-2 text-gray-600 leading-snug">
                 {b.desc}
               </p>
 

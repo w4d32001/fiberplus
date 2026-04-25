@@ -1,115 +1,464 @@
 ---
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/logo3.png";
 import { Icon } from "astro-icon/components";
 
 const links = [
-    { name: "Inicio",    section: "inicio" },
-    { name: "Servicios", section: "servicios" },
-    { name: "Beneficios",section: "beneficios" },
-    { name: "Ayuda",     section: "ayuda" },
-    { name: "Ubicación", section: "ubicacion" },
+    { name: "Inicio",     section: "inicio" },
+    { name: "Servicios",  section: "servicios" },
+    { name: "Beneficios", section: "beneficios" },
+    { name: "Ayuda",      section: "ayuda" },
+    { name: "Ubicación",  section: "ubicacion" },
 ];
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
-    <div class="flex items-center h-20 w-full justify-between pl-10 pr-0">
-        <div class="shrink-0">
-            <img src={logo.src} alt="Logo de Fiberplus" class="h-14 object-cover" />
-        </div>
-        <nav class="hidden lg:flex items-center h-full">
-            <ul class="flex items-center h-full">
-                {links.map((item) => (
-                    <li class="group h-20 flex items-center justify-center">
-                        <button
-                            data-section={item.section}
-                            class="nav-link group-hover:bg-gray-100 h-full w-full flex items-center px-5 uppercase text-sm font-medium tracking-wide transition-colors cursor-pointer"
-                        >
-                            {item.name}
-                        </button>
-                    </li>
-                ))}
-            </ul>
-            <div class="flex items-center bg-primary h-20 px-6 gap-4">
-                <span class="flex items-center text-white gap-2 pr-6 text-sm font-medium">
-                    <Icon name="lucide:phone" class="w-5 h-5" />
-                    017073000
-                </span>
-                <div class="flex items-center gap-3 pl-6">
-                    <span class="bg-white rounded-full p-0.5">
-                        <Icon name="lucide:facebook" class="w-5 h-5 text-primary cursor-pointer" />
-                    </span>
-                    <span class="bg-white rounded-full p-0.5">
-                        <Icon name="lucide:instagram" class="w-5 h-5 text-primary cursor-pointer" />
-                    </span>
-                </div>
-            </div>
-        </nav>
-        <div class="flex items-center lg:hidden gap-3 pr-4">
-            <a href="tel:017073000" class="text-primary">
-                <Icon name="lucide:phone" class="w-6 h-6" />
-            </a>
-            <button id="menu-toggle" aria-label="Abrir menú" class="text-gray-700">
-                <Icon name="lucide:menu" class="w-7 h-7" id="icon-open" />
-                <Icon name="lucide:x"    class="w-7 h-7 hidden" id="icon-close" />
-            </button>
-        </div>
+<header class="fixed top-0 left-0 w-full z-50 header-root">
+
+  <!-- ── Fondo blanco base ── -->
+  <div class="bg-white-panel" aria-hidden="true"></div>
+
+  <!-- ── Fondo azul detrás del logo, posicionado dinámicamente ── -->
+  <div class="bg-blue" id="bg-blue" aria-hidden="true"></div>
+
+  <!-- ── Líneas de velocidad ── -->
+  <div class="speed-bg" aria-hidden="true">
+    <div class="speed-line sl-1"></div>
+    <div class="speed-line sl-2"></div>
+    <div class="speed-line sl-3"></div>
+    <div class="speed-line sl-4"></div>
+    <div class="speed-line sl-5"></div>
+    <div class="speed-line sl-6"></div>
+    <div class="speed-line sl-7"></div>
+    <div class="speed-line sl-8"></div>
+  </div>
+
+  <!-- ── Layout desktop: 3 zonas ── -->
+  <div class="header-inner">
+
+    <!-- ZONA IZQUIERDA: logo centrado en el área azul -->
+    <div class="zone-logo">
+      <div class="logo-wrap">
+        <img src={logo.src} alt="Logo de Fiberplus" class="logo-img" />
+      </div>
     </div>
-    <div
-        id="mobile-menu"
-        class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg"
-    >
-        <ul class="flex flex-col">
-            {links.map((item) => (
-                <li>
-                    <button
-                        data-section={item.section}
-                        class="nav-link mobile-nav-link w-full text-left px-8 py-4 uppercase text-sm font-medium tracking-wide hover:bg-gray-50 hover:text-primary transition-colors cursor-pointer"
-                    >
-                        {item.name}
-                    </button>
-                </li>
-            ))}
-        </ul>
-        <div class="flex items-center gap-4 px-8 py-4 bg-gray-50 border-t border-gray-100">
-            <span class="bg-primary rounded-full p-1.5">
-                <Icon name="lucide:facebook" class="w-5 h-5 text-white cursor-pointer" />
-            </span>
-            <span class="bg-primary rounded-full p-1.5">
-                <Icon name="lucide:instagram" class="w-5 h-5 text-white cursor-pointer" />
-            </span>
+
+    <!-- ZONA CENTRAL/DERECHA: teléfono (desktop) -->
+    <div class="zone-phone">
+      <a href="tel:017073000" class="phone-btn">
+        <Icon name="lucide:phone" class="w-6 h-6 flex-shrink-0" />
+        <div class="flex flex-col leading-tight">
+          <span class="phone-label">Llámanos al:</span>
+          <span class="phone-number">(01) 7073000</span>
         </div>
+      </a>
     </div>
+
+    <!-- ZONA MÓVIL: acciones esquina derecha -->
+    <div class="mobile-actions">
+      <a href="https://www.facebook.com/tuPagina" aria-label="Facebook" class="mobile-phone-icon">
+          <Icon name="lucide:facebook" class="w-6 h-6" />
+      </a>
+      <a href="https://www.instagram.com/tuPagina" aria-label="Instagram" class="mobile-phone-icon">
+          <Icon name="lucide:instagram" class="w-6 h-6" />
+      </a>
+      <button id="menu-toggle" aria-label="Abrir menú" class="menu-toggle-btn">
+          <Icon name="lucide:menu" class="w-7 h-7" id="icon-open" />
+          <Icon name="lucide:x"   class="w-7 h-7 hidden" id="icon-close" />
+      </button>
+  </div>
+
+  </div>
+
+  <!-- ── Menú móvil ── -->
+  <div id="mobile-menu" class="mobile-menu-panel hidden lg:hidden">
+    <ul class="flex flex-col">
+      {links.map((item) => (
+        <li>
+          <button data-section={item.section} class="nav-link mobile-nav-link">
+            {item.name}
+          </button>
+        </li>
+      ))}
+    </ul>
+    <div class="mobile-menu-bottom">
+      <a href="tel:017073000" class="mobile-phone-btn">
+        <Icon name="lucide:phone" class="w-4 h-4 flex-shrink-0" />
+        <div class="flex flex-col leading-tight">
+          <span class="mobile-phone-label">Llámanos al:</span>
+          <span class="mobile-phone-number">017073000</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
 </header>
 
 <div class="h-20"></div>
 
+<style>
+  /* ══════════════════════════════════════════
+     BASE
+  ══════════════════════════════════════════ */
+  .header-root {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 50;
+    overflow: visible;
+  }
+
+  /* ══════════════════════════════════════════
+     FONDOS
+  ══════════════════════════════════════════ */
+  .bg-white-panel {
+    position: absolute;
+    inset: 0;
+    background: #020812;
+    z-index: 0;
+  }
+
+  /* El ancho y posición se controlan por JS en desktop
+     para que el área azul siga al logo centrado */
+  .bg-blue {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: #ffffff;
+    z-index: 1;
+    left: 0;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 32px) 100%, 0 100%);
+    transition: left 0.1s, width 0.1s;
+  }
+
+  @media (max-width: 1023px) {
+    .bg-blue {
+      left: 0 !important;
+      width: 460px;
+    }
+  }
+  @media (min-width: 360px) and (max-width: 1023px)  { .bg-blue { width: 230px; } }
+  @media (min-width: 480px) and (max-width: 1023px)  { .bg-blue { width: 230px; } }
+  @media (min-width: 640px) and (max-width: 1023px)  { .bg-blue { width: 230px; } }
+  @media (min-width: 768px) and (max-width: 1023px)  { .bg-blue { width: 230px; } }
+
+  /* ══════════════════════════════════════════
+     LÍNEAS DE VELOCIDAD
+  ══════════════════════════════════════════ */
+  .speed-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+  }
+/* ── Líneas de velocidad ancladas a la derecha, responsivas ── */
+.speed-line {
+  position: absolute;
+  height: 5px;
+  border-radius: 1px;
+  /* Ancla desde la diagonal del bg-blue hacia la derecha */
+  left: 0;
+  width: 100%;
+}
+  /* clamp(mínimo, ideal, máximo) — escalan suavemente con el viewport */
+/* Anchos fijos en móvil */
+.sl-1 { height: 5px; background: linear-gradient(to left, #0088ff, transparent); opacity: 0.55; }
+.sl-2 { height: 5px; background: linear-gradient(to left, #ff2222, transparent); opacity: 0.45; }
+.sl-3 { height: 5px; background: linear-gradient(to left, #0066ff, transparent); opacity: 0.60; }
+.sl-4 { height: 5px; background: linear-gradient(to left, #ff4444, transparent); opacity: 0.40; }
+.sl-5 { height: 5px; background: linear-gradient(to left, #0066ff, transparent); opacity: 0.40; }
+.sl-6 { height: 5px; background: linear-gradient(to left, #ff5555, transparent); opacity: 0.55; }
+.sl-7 { height: 5px; background: linear-gradient(to left, #0099ff, transparent); opacity: 0.60; }
+
+
+  /* ══════════════════════════════════════════
+     LAYOUT INTERNO
+     Móvil:   flex space-between
+     Desktop: logo centrado en el tercio izquierdo,
+              teléfono centrado en los dos tercios derechos
+  ══════════════════════════════════════════ */
+  .header-inner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    width: 100%;
+    padding: 0 16px;
+  }
+
+  /* Desktop: grid de 2 columnas iguales
+     [logo centrado en col-1] [teléfono centrado en col-2] */
+  @media (min-width: 1024px) {
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 40px;
+    }
+  }
+  @media (min-width: 1280px) { .header-inner { padding: 0 60px; } }
+  @media (min-width: 1536px) { .header-inner { padding: 0 80px; } }
+
+  /* ══════════════════════════════════════════
+     ZONA LOGO
+  ══════════════════════════════════════════ */
+  .zone-logo {
+    display: flex;
+    align-items: center;
+    /* Móvil: izquierda */
+    justify-content: flex-start;
+  }
+
+  @media (min-width: 1024px) {
+    .zone-logo {
+      /* Desktop: centrado dentro de su columna (mitad izquierda) */
+      justify-content: center;
+    }
+  }
+
+  /* ══════════════════════════════════════════
+     LOGO — contorno sólido
+  ══════════════════════════════════════════ */
+  .logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    filter:
+      drop-shadow( 1px  0px 0px rgba(255,255,255,0.9))
+      drop-shadow(-1px  0px 0px rgba(255,255,255,0.9))
+      drop-shadow( 0px  1px 0px rgba(255,255,255,0.9))
+      drop-shadow( 0px -1px 0px rgba(255,255,255,0.9));
+  }
+
+  .logo-img {
+    height: 47px;
+    object-fit: contain;
+    display: block;
+  }
+  @media (max-width: 359px)  { .logo-img { height: 35px; } }
+  @media (min-width: 1024px) { .logo-img { height: 56px; } }
+
+  /* ══════════════════════════════════════════
+     ZONA TELÉFONO (desktop)
+  ══════════════════════════════════════════ */
+  .zone-phone {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .zone-phone {
+      display: flex;
+      /* centrado dentro de la columna derecha */
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .phone-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 24px;
+    height: 56px;
+    border-radius: 999px;
+    border: 2px solid #205190;
+    color: #205190;
+    background: #ffffff;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+  .phone-btn:hover { background: #205190; color: #ffffff; }
+
+  .phone-label  { font-size: 12px; opacity: 0.8; display: block; line-height: 1; }
+  .phone-number { font-size: 17px; font-weight: 800; line-height: 1.3; letter-spacing: 0.02em; }
+
+  /* ══════════════════════════════════════════
+     ACCIONES MÓVIL — esquina derecha
+  ══════════════════════════════════════════ */
+  .mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+  @media (min-width: 1024px) { .mobile-actions { display: none; } }
+
+  .mobile-phone-icon { color: #ffffff; line-height: 0; }
+  .menu-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 0;
+    color: #ffffff;
+  }
+
+  /* ══════════════════════════════════════════
+     MENÚ MÓVIL
+  ══════════════════════════════════════════ */
+  .mobile-menu-panel {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    z-index: 49;
+  }
+
+  .mobile-nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 16px 32px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #083969;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+    transition: background 0.15s;
+  }
+  .mobile-nav-link:hover { background: #f0f4f8; }
+
+  .mobile-menu-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .mobile-phone-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid #083969;
+    color: #083969;
+    text-decoration: none;
+  }
+  .speed-bg {
+  transition: opacity 0.3s ease;
+}
+  .mobile-phone-label  { font-size: 9px; opacity: 0.7; display: block; line-height: 1; }
+  .mobile-phone-number { font-size: 15px; font-weight: 800; line-height: 1.3; }
+</style>
 <script>
-    function scrollToSection(sectionId: string) {
-        const target = document.getElementById(sectionId);
-        if (!target) return;
-        const headerHeight = 80; // h-20 = 5rem = 80px
-        const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-        window.scrollTo({ top, behavior: "smooth" });
+  function syncBgBlue() {
+    const bgBlue   = document.getElementById("bg-blue") as HTMLElement;
+    const zonelogo = document.querySelector(".zone-logo") as HTMLElement;
+    const logoWrap = document.querySelector(".logo-wrap") as HTMLElement;
+
+    if (!bgBlue || !zonelogo || !logoWrap) return;
+
+    if (window.innerWidth >= 1024) {
+      const logoRect = logoWrap.getBoundingClientRect();
+      const PAD      = 24;
+      const DIAGONAL = 80;
+      const left     = 0;
+      const width    = logoRect.right + PAD + DIAGONAL;
+
+      bgBlue.style.left     = `${left}px`;
+      bgBlue.style.width    = `${width}px`;
+      bgBlue.style.clipPath = `polygon(0 0, 100% 0, calc(100% - ${DIAGONAL}px) 100%, 0 100%)`;
+    } else {
+      bgBlue.style.left     = "";
+      bgBlue.style.width    = "";
+      bgBlue.style.clipPath = "";
+    }
+  }
+
+  function syncSpeedLines() {
+    const speedBg = document.querySelector('.speed-bg') as HTMLElement;
+    if (!speedBg) return;
+
+    if (window.innerWidth < 1024) {
+      speedBg.style.opacity = '0';
+      return;
     }
 
-    document.querySelectorAll<HTMLButtonElement>(".nav-link").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            const section = btn.dataset.section;
-            if (section) scrollToSection(section);
-            document.getElementById("mobile-menu")?.classList.add("hidden");
-            document.getElementById("icon-open")?.classList.remove("hidden");
-            document.getElementById("icon-close")?.classList.add("hidden");
-        });
-    });
+    speedBg.style.opacity = '1';
 
-    const toggle    = document.getElementById("menu-toggle");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const iconOpen  = document.getElementById("icon-open");
-    const iconClose = document.getElementById("icon-close");
+    const logoWrap = document.querySelector('.logo-wrap') as HTMLElement;
+    if (!logoWrap) return;
 
-    toggle?.addEventListener("click", () => {
-        const isHidden = mobileMenu?.classList.toggle("hidden");
-        iconOpen?.classList.toggle("hidden", !isHidden);
-        iconClose?.classList.toggle("hidden", isHidden);
+    const logoRect     = logoWrap.getBoundingClientRect();
+    const headerHeight = 80;
+    const lineStart    = 0;
+    const lineEnd      = logoRect.left + 10;
+
+    const anchors = [0.05, 0.18, 0.32, 0.45, 0.55, 0.68, 0.80, 0.95];
+    const lines   = document.querySelectorAll<HTMLElement>('.speed-line');
+
+    lines.forEach((line, i) => {
+      const t    = anchors[i] ?? (i / lines.length);
+      const yPx  = logoRect.top + logoRect.height * t;
+      const yPct = (yPx / headerHeight) * 100;
+
+      line.style.top   = `${yPct}%`;
+      line.style.left  = `${lineStart}px`;
+      line.style.width = `${lineEnd - lineStart}px`;
     });
+  }
+
+  // Ejecutar inmediatamente
+  syncBgBlue();
+  syncSpeedLines();
+
+  // Y también cuando el DOM esté listo (por si acaso)
+  document.addEventListener('DOMContentLoaded', () => {
+    syncBgBlue();
+    syncSpeedLines();
+  });
+
+  // Activar transición suave solo después de la carga inicial
+  setTimeout(() => {
+    const bgBlue = document.getElementById('bg-blue') as HTMLElement;
+    if (bgBlue) bgBlue.style.transition = 'width 0.15s ease, left 0.15s ease';
+  }, 100);
+
+  // Resize
+  window.addEventListener('resize', () => {
+    syncBgBlue();
+    syncSpeedLines();
+  });
+
+  /* ── Scroll suave ── */
+  (window as any).scrollToSection = function(sectionId: string) {
+        const target = document.getElementById(sectionId);
+    if (!target) return;
+    const top = target.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>(".nav-link").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const section = btn.dataset.section;
+      if (section) (window as any).scrollToSection(section);
+       document.getElementById("mobile-menu")?.classList.add("hidden");
+      document.getElementById("icon-open")?.classList.remove("hidden");
+      document.getElementById("icon-close")?.classList.add("hidden");
+    });
+  });
+
+  /* ── Toggle menú móvil ── */
+  const toggle     = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const iconOpen   = document.getElementById("icon-open");
+  const iconClose  = document.getElementById("icon-close");
+
+  toggle?.addEventListener("click", () => {
+    const isHidden = mobileMenu?.classList.toggle("hidden");
+    iconOpen?.classList.toggle("hidden", !isHidden);
+    iconClose?.classList.toggle("hidden", !!isHidden);
+  });
 </script>

@@ -1,0 +1,48 @@
+<!-- ── SECCIÓN: Horario ── style="background: linear-gradient(to right, var(--color-primary, #185FA5),#063666, #021c40);"-->
+<section class="w-full py-2 overflow-hidden bg-[#020812]" >
+    <!-- DESKTOP: todo en una línea -->
+    <div class="hidden md:flex items-center justify-center gap-2 px-6 w-full">
+      <span class="text-white font-bold text-xl whitespace-nowrap">Horario:</span>
+      <span class="text-white text-lg opacity-80 whitespace-nowrap">•&nbsp;Lunes a Viernes: 7:00 am – 10:00 pm</span>
+      <span class="text-white opacity-40 text-md">|</span>
+      <span class="text-white text-lg opacity-80 whitespace-nowrap">•&nbsp;Sábado: 9:00 am – 8:00 pm</span>
+      <span class="text-white opacity-40 text-md">|</span>
+      <span class="text-white text-lg opacity-80 whitespace-nowrap">•&nbsp;Domingo: 9:00 am – 7:00 pm</span>
+    </div>
+  
+    <!-- MOBILE: carrusel automático -->
+    <div class="flex md:hidden overflow-hidden w-full">
+      <div id="horario-track" class="flex items-center gap-2 whitespace-nowrap py-1" style="will-change: transform;">
+        <!-- bloque 1 -->
+        <span class="text-white font-bold text-md flex-shrink-0">Horario:</span>
+        <span class="text-white text-md opacity-80 flex-shrink-0">• Lunes a Viernes: 7:00 am – 10:00 pm</span>
+        <span class="text-white opacity-40 text-md flex-shrink-0">|</span>
+        <span class="text-white text-md opacity-80 flex-shrink-0">• Sábado: 9:00 am – 8:00 pm</span>
+        <span class="text-white opacity-40 text-md flex-shrink-0">|</span>
+        <span class="text-white text-md opacity-80 flex-shrink-0">• Domingo: 9:00 am – 7:00 pm</span>
+        <span class="text-white opacity-30 text-md flex-shrink-0 px-4">✦</span>
+        <!-- bloque 2 (duplicado para loop infinito) -->
+        <span class="text-white font-bold text-md flex-shrink-0">Horario:</span>
+        <span class="text-white text-md opacity-80 flex-shrink-0">• Lunes a Viernes: 7:00 am – 10:00 pm</span>
+        <span class="text-white opacity-40 text-md flex-shrink-0">|</span>
+        <span class="text-white text-md opacity-80 flex-shrink-0">• Sábado: 9:00 am – 8:00 pm</span>
+        <span class="text-white opacity-40 text-md flex-shrink-0">|</span>
+        <span class="text-white text-md opacity-80 flex-shrink-0">• Domingo: 9:00 am – 7:00 pm</span>
+        <span class="text-white opacity-30 text-md flex-shrink-0 px-4">✦</span>
+      </div>
+    </div>
+  
+  </section>
+  
+  <script is:inline>
+    const horarioTrack = document.getElementById('horario-track');
+    if (horarioTrack) {
+      let pos = 0;
+      (function animateHorario() {
+        pos -= 0.5;
+        if (Math.abs(pos) >= horarioTrack.scrollWidth / 2) pos = 0;
+        horarioTrack.style.transform = `translateX(${pos}px)`;
+        requestAnimationFrame(animateHorario);
+      })();
+    }
+  </script>
