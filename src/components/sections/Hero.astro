@@ -26,21 +26,28 @@ const bg2R = `url(${img2R.src})`;
     <span class="text-sm xl:text-base 2xl:text-[22px] text-center block text-secondary font-bold mb-3 xl:mb-4 2xl:mb-6">
       ¡Dejame tu número para contactarnos!
     </span>
-    <form action="" class="flex flex-col gap-y-2 xl:gap-y-3 2xl:gap-y-4">
-      <input type="text" placeholder="Ingrese su nombre"
+    <form class="flex flex-col gap-y-2 xl:gap-y-3 2xl:gap-y-4" onsubmit="enviarWhatsapp(event, 'desktop')">
+      <input id="nombre-desktop" type="text" placeholder="Ingrese su nombre"
         class="outline-none py-2 xl:py-2.5 px-3 xl:px-4 rounded-xl w-full border border-primary placeholder:text-gray-500 text-gray-600 text-xs xl:text-sm focus:ring-2 focus:ring-secondary/30 transition"/>
-      <input type="text" placeholder="Ingrese su número"
+        <input id="numero-desktop" type="tel" placeholder="Ingrese su número"
+        maxlength="9"
+        oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9)"
         class="outline-none py-2 xl:py-2.5 px-3 xl:px-4 rounded-xl w-full border border-primary placeholder:text-gray-500 text-gray-600 text-xs xl:text-sm focus:ring-2 focus:ring-secondary/30 transition"/>
+      <span id="error-desktop" class="text-red-500 text-[10px] xl:text-xs hidden"></span>
       <label class="flex items-start gap-x-2 cursor-pointer">
-        <input type="checkbox" class="mt-1 accent-secondary shrink-0"/>
+        <input type="checkbox" 
+          class="mt-1 accent-secondary shrink-0"
+          onchange="document.getElementById('btn-desktop').disabled = !this.checked"/>
         <span class="text-[10px] xl:text-xs text-gray-600 leading-relaxed">
           Autorizo el contacto para recibir información sobre Fiberplus según los términos generales y condiciones.
         </span>
       </label>
-      <button type="submit"
-        class="w-full py-2 xl:py-2.5 2xl:py-3 bg-secondary hover:bg-secondary/90 text-white rounded-xl cursor-pointer font-semibold transition-colors duration-200 text-sm xl:text-base 2xl:text-lg">
-        Llámenme
-      </button>
+      <button id="btn-desktop" type="submit" disabled
+      class="w-full py-2 xl:py-2.5 2xl:py-3 bg-secondary text-white rounded-xl font-semibold transition-all duration-200 text-sm xl:text-base 2xl:text-lg 
+      disabled:bg-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed
+      enabled:hover:bg-secondary/90 enabled:cursor-pointer">
+      Llámenme
+    </button>
     </form>
   </div>
 
@@ -79,19 +86,24 @@ const bg2R = `url(${img2R.src})`;
         <span class="text-[22px] text-secondary font-bold text-center">¡Dejame tu numero para contactarnos!</span>
         <button id="btn-cerrar-modal" class="text-gray-400 hover:text-gray-600 text-3xl leading-none">&times;</button>
       </div>
-      <form action="" class="flex flex-col gap-y-4">
-        <input type="text" placeholder="Ingrese su nombre"
+      <form class="flex flex-col gap-y-4" onsubmit="enviarWhatsapp(event, 'mobile')">
+        <input id="nombre-mobile" type="text" placeholder="Ingrese su nombre"
           class="outline-none py-2.5 px-4 rounded-xl w-full border border-primary placeholder:text-gray-400 text-gray-700 text-sm focus:ring-2 focus:ring-secondary/30 transition"/>
-        <input type="text" placeholder="Ingrese su número"
+          <input id="numero-mobile" type="tel" placeholder="Ingrese su número"
+          maxlength="9"
+          oninput="this.value = this.value.replace(/\D/g, '').slice(0, 9)"
           class="outline-none py-2.5 px-4 rounded-xl w-full border border-primary placeholder:text-gray-400 text-gray-700 text-sm focus:ring-2 focus:ring-secondary/30 transition"/>
+        <span id="error-mobile" class="text-red-500 text-xs hidden"></span>
         <label class="flex items-start gap-x-2 cursor-pointer">
-          <input type="checkbox" class="mt-0.5 accent-secondary shrink-0"/>
+          <input type="checkbox"
+            class="mt-0.5 accent-secondary shrink-0"
+            onchange="document.getElementById('btn-mobile').disabled = !this.checked"/>
           <span class="text-xs text-gray-600 leading-relaxed">
             Autorizo el contacto para recibir información sobre Fiberplus según los términos generales y condiciones.
           </span>
         </label>
-        <button type="submit"
-          class="w-full py-3 bg-secondary/90 hover:bg-secondary/90 text-white rounded-xl cursor-pointer font-semibold transition-colors duration-200 text-sm">
+        <button id="btn-mobile" type="submit" disabled
+          class="w-full py-3 bg-secondary/90 hover:bg-secondary/90 text-white rounded-xl cursor-pointer font-semibold transition-colors duration-200 text-sm disabled:opacity-40 disabled:cursor-not-allowed">
           Llámenme
         </button>
       </form>
@@ -176,6 +188,35 @@ const bg2R = `url(${img2R.src})`;
   }
 </style>
 <script is:inline>
+function enviarWhatsapp(e, tipo) {
+  e.preventDefault()
+  const nombre  = document.getElementById(`nombre-${tipo}`).value.trim()
+  const numero  = document.getElementById(`numero-${tipo}`).value.trim()
+  const errorEl = document.getElementById(`error-${tipo}`)
+
+  // limpia error previo
+  errorEl.textContent = ''
+  errorEl.classList.add('hidden')
+
+  if (!nombre) {
+    errorEl.textContent = 'Por favor ingresa tu nombre.'
+    errorEl.classList.remove('hidden')
+    return
+  }
+  if (!numero) {
+    errorEl.textContent = 'Por favor ingresa tu número.'
+    errorEl.classList.remove('hidden')
+    return
+  }
+  if (numero.length !== 9) {
+    errorEl.textContent = 'El número debe tener exactamente 9 dígitos.'
+    errorEl.classList.remove('hidden')
+    return
+  }
+
+  const mensaje = `Hola, me llamo *${nombre}* y mi número es *${numero}*. Me gustaría recibir información sobre los planes de Fiberplus.`
+  window.open(`https://wa.me/51946759827?text=${encodeURIComponent(mensaje)}`, '_blank')
+}
   document.addEventListener('DOMContentLoaded', () => {
     const slides   = document.querySelectorAll('.bg-slide');
     const btnOpen  = document.getElementById('btn-contacto-mobile');
